@@ -2,7 +2,7 @@
 
 **Subject**: Rewards Eligibility Oracle (REO / GIP-0088) on Arbitrum Sepolia
 **Reference**: `graphprotocol/contracts` PR #1345 (`deployment/testnet/2026-06-09/gip-0088`)
-**Tester**: lodestar-team · tooling: [`reo-doctor`](https://github.com/lodestar-team/reo-doctor)
+**Tester**: nightswatchhq · tooling: [`reo-doctor`](https://github.com/nightswatchhq/reo-doctor)
 **Method**: live read-only verification + live baseline transactions on Arbitrum Sepolia
 (funded by Ørjan with 100k GRT), plus behavioural tests on a local `anvil` fork for the
 parts that need coordinator powers or time-travel.
