@@ -1,0 +1,49 @@
+# yatr - https://github.com/cargopete/yatr
+#
+# Task names are the same across every nightswatchhq repo, so `yatr ci` means
+# the same thing wherever you are. Note that `ci` is deliberately not called
+# `check`: `yatr check` is a builtin that validates this file, and it shadows
+# any task of that name without warning.
+
+# One shell script is the product. The tasks are the ones that keep it honest.
+
+[settings]
+cache = true
+
+[tasks.lint]
+desc = "shellcheck the tool"
+run = ["shellcheck reo-doctor.sh"]
+sources = ["reo-doctor.sh"]
+
+[tasks.syntax]
+desc = "Fail if the script does not parse"
+run = ["bash -n reo-doctor.sh"]
+sources = ["reo-doctor.sh"]
+
+[tasks.help]
+desc = "Smoke test: the tool runs and prints its usage"
+run = ["./reo-doctor.sh --help"]
+no_cache = true
+allow_failure = true
+
+[tasks.links]
+desc = "Fail if a relative markdown link points at a file that is not there"
+shell = true
+sources = ["**/*.md"]
+run = ['''
+missing=0
+for f in $(git ls-files '*.md'); do
+  d=$(dirname "$f")
+  for l in $(grep -oE '\]\([^)]+\)' "$f" | sed 's/^](//;s/)$//' | grep -vE '^(https?:|mailto:|#|<)' | sed 's/#.*$//'); do
+    [ -z "$l" ] && continue
+    if [ ! -e "$d/$l" ]; then echo "broken: $f -> $l"; missing=$((missing+1)); fi
+  done
+done
+if [ "$missing" -ne 0 ]; then echo "$missing broken relative link(s)"; exit 1; fi
+echo "all relative markdown links resolve"
+''']
+
+[tasks.ci]
+desc = "What CI runs: syntax, lint, links"
+depends = ["syntax", "lint", "links"]
+run = []
