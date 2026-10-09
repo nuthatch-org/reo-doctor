@@ -40,7 +40,7 @@ The point where bash stops being the right tool.
 - [ ] One-command `make demo` walking an indexer through Sets 2m–4m on the fork.
 
 ## Distribution
-- Canonical home: `nightswatchhq/reo-doctor` (this repo).
+- Canonical home: `nuthatch-org/reo-doctor` (this repo).
 - Courtesy copy of `reo-doctor.sh` upstreamed into `graphprotocol/contracts` PR #1345
   `support/`, where the test cohort already looks.
-- Announce in The Graph indexer Discord + The Night's Watch once REO nears mainnet.
+- Announce in The Graph indexer Discord + Nuthatch once REO nears mainnet.
