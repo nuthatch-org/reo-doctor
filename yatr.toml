@@ -20,7 +20,7 @@ desc = "Fail if the script does not parse"
 run = ["bash -n reo-doctor.sh"]
 sources = ["reo-doctor.sh"]
 
-[tasks.help]
+[tasks.smoke]
 desc = "Smoke test: the tool runs and prints its usage"
 run = ["./reo-doctor.sh --help"]
 no_cache = true
